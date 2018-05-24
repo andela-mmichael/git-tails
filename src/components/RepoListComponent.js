@@ -1,18 +1,29 @@
 import React from "react";
+import Table from "react-table";
+import "react-table/react-table.css";
 
 export default class RepoListComponent extends React.Component {
   render() {
-    console.log(this.props);
-    return (
-      <ul className="user-details">
-        this.props.repos.map((repo) =>
-          <li>{repo.name}></li>
-          <li>{repo.description}</li>
-          <li>{repo.url}</li>
-          <li>{repo.forks_count}</li>
-          <li>{repo.watchers_count}</li>
-        );
-      </ul>
-    );
+    const { repos } = this.props;
+    const columns = [
+      {
+        Header: "Name",
+        accessor: "url",
+        Cell: props => <a href={props.value}>{props.original.name}</a>
+      },
+      {
+        Header: "Description",
+        accessor: "description"
+      },
+      {
+        Header: "Forks",
+        accessor: "forks_count"
+      },
+      {
+        Header: "Watchers",
+        accessor: "watchers_count"
+      }
+    ];
+    return repos.length ? <Table data={repos} columns={columns} /> : null;
   }
 }

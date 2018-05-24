@@ -1,5 +1,3 @@
-
-// eslint-disable-next-line
 import React, { Component } from 'react';
 import UserDetailsComponent from "./components/UserDetailsComponent";
 import './App.css';
@@ -9,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '' ,
+      username: '',
       userDetails: null,
       repos: []
     };
@@ -20,7 +18,7 @@ class App extends Component {
 
   handleChange(event) {
     console.log(event.target.value);
-    this.setState({ value: event.target.value });
+    this.setState({ username: event.target.value });
   }
 
   handleSubmit(event) {
@@ -31,24 +29,25 @@ class App extends Component {
         this.setState({
           userDetails: response.data
         })
-        return this.getRepoList('andela-mmichael');
+        return this.getRepoList(username);
       })
       .then((body) => {
+        console.log(body);
         return this.setState({ repos: body.data });
       })
       .catch((err) => console.error(err));
   }
 
-  getRepoList (username) {
-    axios.get(`https://api.github.com/users/${username}/repos`)
+  getRepoList(username) {
+    return axios.get(`https://api.github.com/users/${username}/repos`)
       .then((body) => {
         return body;
       }).catch((err) => console.error(err))
   }
   render() {
-    const details = this.state.userDetails  ?
-        <UserDetailsComponent user={this.state.userDetails} repos={this.state.repos}/>
-        : '';
+    const details = this.state.userDetails ?
+      <UserDetailsComponent user={this.state.userDetails} repos={this.state.repos} />
+      : '';
 
     return (
       <div className="App">
