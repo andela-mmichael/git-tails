@@ -45,7 +45,7 @@ class App extends Component {
       }).catch((err) => console.error(err))
   }
   render() {
-    const details = this.state.userDetails ?
+    const UserDetails = this.state.userDetails ?
       <UserDetailsComponent user={this.state.userDetails} repos={this.state.repos} />
       : '';
 
@@ -62,7 +62,7 @@ class App extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        {details}
+        {UserDetails}
       </div>
     );
   }
