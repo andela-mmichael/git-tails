@@ -15,6 +15,7 @@ export default class UserDetailsComponent extends React.Component {
           <li>Email: {user.email}</li>
           <li>followers: {user.followers}</li>
           <li>Updated_At: {user.updated_at}</li>
+          {/* <li><a onClick={getRepoList}>View repository list</a></li> */}
         </ul>
         {RepoList}
       </div>

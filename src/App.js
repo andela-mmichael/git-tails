@@ -47,7 +47,7 @@ class App extends Component {
   render() {
     const UserDetails = this.state.userDetails ?
       <UserDetailsComponent user={this.state.userDetails} repos={this.state.repos} />
-      : '';
+      : null;
 
     return (
       <div className="App">
@@ -56,10 +56,9 @@ class App extends Component {
         </header>
 
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
+          <label> Github Name: &nbsp;
+            <input type="text" value={this.state.username} onChange={this.handleChange} />
+          </label> <br/><br/>
           <input type="submit" value="Submit" />
         </form>
         {UserDetails}
