@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, Route  } from "react-router-dom";
 import RepoListComponent from "./RepoListComponent";
 
 export default class UserDetailsComponent extends React.Component {
@@ -16,6 +17,7 @@ export default class UserDetailsComponent extends React.Component {
           <li>followers: {user.followers}</li>
           <li>Updated_At: {user.updated_at}</li>
           <li><a href="# " onClick={getRepos}>View repository list</a></li>
+          {/* <li><Link to="/repos">View repository list</Link></li> */}
         </ul>
         {RepoList}
       </div>
