@@ -3,7 +3,7 @@ import RepoListComponent from "./RepoListComponent";
 
 export default class UserDetailsComponent extends React.Component {
   render() {
-    const { user, repos } = this.props.user;
+    const { user, repos, getRepos } = this.props;
     const RepoList = repos.length ? <RepoListComponent repos={this.props.repos} /> : null;
 
     return (
@@ -15,7 +15,7 @@ export default class UserDetailsComponent extends React.Component {
           <li>Email: {user.email}</li>
           <li>followers: {user.followers}</li>
           <li>Updated_At: {user.updated_at}</li>
-          {/* <li><a onClick={getRepoList}>View repository list</a></li> */}
+          <li><a href="# " onClick={getRepos}>View repository list</a></li>
         </ul>
         {RepoList}
       </div>

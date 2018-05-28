@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   handleChange(event) {
-    console.log(event.target.value);
     this.setState({ username: event.target.value });
   }
 
@@ -25,28 +24,23 @@ class App extends Component {
     event.preventDefault();
     const username = this.state.username;
     axios.get(`https://api.github.com/users/${username}`)
-      .then((response) => {
-        this.setState({
-          userDetails: response.data
-        })
-        return this.getRepoList(username);
-      })
-      .then((body) => {
-        console.log(body);
-        return this.setState({ repos: body.data });
-      })
+      .then((response) => this.setState({ userDetails: response.data }))
       .catch((err) => console.error(err));
   }
 
   getRepoList(username) {
     return axios.get(`https://api.github.com/users/${username}/repos`)
-      .then((body) => {
-        return body;
-      }).catch((err) => console.error(err))
+      .then(body => this.setState({ repos: body.data }))
+      .catch((err) => console.error(err))
   }
+
   render() {
     const UserDetails = this.state.userDetails ?
-      <UserDetailsComponent user={this.state.userDetails} repos={this.state.repos} />
+      <UserDetailsComponent
+        user={this.state.userDetails}
+        repos={this.state.repos}
+        getRepos={this.getRepoList.bind(this, this.state.username)}
+      />
       : null;
 
     return (
