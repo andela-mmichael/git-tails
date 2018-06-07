@@ -1,12 +1,9 @@
 import React from "react";
-import { Link, Route  } from "react-router-dom";
-import RepoListComponent from "./RepoListComponent";
+import { Link } from "react-router-dom";
 
 export default class UserDetailsComponent extends React.Component {
   render() {
-    const { user, repos, getRepos } = this.props;
-    const RepoList = repos.length ? <RepoListComponent repos={this.props.repos} /> : null;
-
+    const { user, getRepos } = this.props;
     return (
       <div>
         <ul className="user-details">
@@ -16,10 +13,8 @@ export default class UserDetailsComponent extends React.Component {
           <li>Email: {user.email}</li>
           <li>followers: {user.followers}</li>
           <li>Updated_At: {user.updated_at}</li>
-          <li><a href="# " onClick={getRepos}>View repository list</a></li>
-          {/* <li><Link to="/repos">View repository list</Link></li> */}
+          <li><Link to="/repos" onClick={getRepos}>View repository list</Link></li>
         </ul>
-        {RepoList}
       </div>
     );
   }

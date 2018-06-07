@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import UserDetailsComponent from "./components/UserDetailsComponent";
-import { HashRouter, Route, BrowserRouter, Link } from "react-router-dom";
+import { Route, BrowserRouter as Router } from "react-router-dom";
 import dotenv from "dotenv";
 import './App.css';
 import axios from 'axios';
+import RepoListComponent from "./components/RepoListComponent";
+
 dotenv.config();
 
 class App extends Component {
@@ -47,20 +49,23 @@ class App extends Component {
         getRepos={this.getRepoList.bind(this, this.state.username)}
       />
       : null;
+    const RepoList = this.state.repos.length ? <RepoListComponent repos={this.state.repos} /> : null;
 
-    return (
-      <div className="App">
+
+    return <div className="App">
         <header className="App-header">
           <h1 className="App-title">Gittails React App</h1>
         </header>
         {/* <SearchComponent /> */}
         <form onSubmit={this.handleSubmit}>
-          <label> Github Name: &nbsp;
+          <label>
+            {" "}
+            Github Name: &nbsp;
             <input type="text" value={this.state.username} onChange={this.handleChange} />
-          </label> <br /><br />
+          </label> <br />
+          <br />
           <input type="submit" value="Submit" />
         </form>
-
 
         {/* <button type="button" className="btn btn-large btn-block btn-default">Go to Landing</button> */}
         {/* <HashRouter>
@@ -68,39 +73,26 @@ class App extends Component {
         </HashRouter> */}
 
         {UserDetails}
-      </div>
-    );
+
+        <Router>
+          <Route path="/repos" component={RepoList} />
+        </Router>
+      </div>;
   }
 }
 
-function SearchComponent(props) {
-  return (
-    <form noValidate>
-    {/* <form onSubmit={this.handleSubmit}> */}
-      <label> Github Name: &nbsp;
-        <input type="text" value={this.state.username} onChange={this.handleChange} />
-      </label> <br /><br />
-      <input type="submit" value="Submit" />
-      {/* <input type="submit" value="Submit" onClick={props.handleSubmit}/> */}
-    </form>
-  );
-}
-
-function Landing(params) {
-  return (
-    <div>
-      <p>We are at the landing page.</p>
-    </div>
-  )
-}
-
-function Contact(params) {
-  return (
-    <div>
-      <p>We are at the landing page.</p>
-    </div>
-  );
-}
+// function SearchComponent(props) {
+//   return (
+//     <form noValidate>
+//     {/* <form onSubmit={this.handleSubmit}> */}
+//       <label> Github Name: &nbsp;
+//         <input type="text" value={this.state.username} onChange={this.handleChange} />
+//       </label> <br /><br />
+//       <input type="submit" value="Submit" />
+//       {/* <input type="submit" value="Submit" onClick={props.handleSubmit}/> */}
+//     </form>
+//   );
+// }
 
 
 export default App;
